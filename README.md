@@ -96,7 +96,7 @@ struct 는 이곳에 있다. [dictobject.h](https://hg.python.org/cpython/file/e
 언뜻 보면 비슷해 보이지만 큰 차이가 있다. dictentry에는 value를 가르키는 주소값이 추가로 저장되어 있고 setentry에는 value없이 key만 저장하고 있음을 알 수 있다. 실제로 c 코드를 보니 set에는 value가 없고 dict에는 key, value로 매핑되어 있는지 확실히 알 수 있다.
 
 ## 그럼 set에서 pop하면?
-hash table을 구현해보면 알겠지만 hash table을 순회하면 key 배열의 맨 앞에서 부터 bucket 순으로 순회를 하게된다. key1 -> bucket0 -> bucket 1 -> ... (key 1 끝) key2 -> bucket 0 ...
+hash table을 구현해보면 알겠지만 hash table을 순회하면 bucket으로 부터 안의 키, 그리고 다음 bucket 순으로 순회를 한다.
 이렇게 순회를 하니 pop을 한다고 가장 뒤에 있는 값까지 순회해서 내뱉는 것이 아닌 가장 처음에 나온 값을 뱉게되는 것이다. 
 #### setobject.c에서 pop method
 ![](https://images.velog.io/images/jewelrykim/post/3e1471d6-956a-413f-81f9-d9b3a9bf0ccb/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-04-30%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.46.43.png)
